@@ -53,6 +53,8 @@ if(grepl("BIOMV", artifact$format)){
   if(paste0(artifact$uuid, "/data/stats.tsv") %in% artifact$contents$files.Name){artifact$data<-read.table(paste0(tmp,"/", artifact$uuid, "/data/stats.tsv"), header=TRUE, row.names=1, sep='\t')} #can be tsv or csv
 } else if (artifact$format=="TSVTaxonomyDirectoryFormat"){
   artifact$data<-read.table(paste0(tmp,"/", artifact$uuid, "/data/taxonomy.tsv"), sep='\t', header=TRUE, quote="", comment="")
+} else if (artifact$format=="BLAST6DirectoryFormat") {
+  artifact$data<-read.table(paste0(tmp,"/", artifact$uuid, "/data/blast6.tsv"), sep='\t', header=FALSE)
 } else if (artifact$format=="OrdinationDirectoryFormat"){
   artifact$data<-suppressWarnings(readLines(paste0(tmp,"/", artifact$uuid, "/data/ordination.txt")))
   artifact<-parse_ordination(artifact, tmp)
